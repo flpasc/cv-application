@@ -1,11 +1,12 @@
 import React from "react";
 import Project from "./helper/Project";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Projects(props) {
 	const projects = [props.projects];
 
 	const projectElements = projects.map((project) => {
-		return <Project project={project} />;
+		return <Project project={project} key={uuidv4()} />;
 	});
 
 	return (
