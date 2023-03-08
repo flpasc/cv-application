@@ -1,38 +1,107 @@
-.App {
-  text-align: center;
+* {
+	box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+	margin: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+	display: grid;
+	grid-template: repeat(4, 1fr) / 1fr 2fr 1fr;
+	background-color: rgb(255, 222, 88);
+	padding: 10px;
+	margin: 10px;
+	border-bottom: 1px solid black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header--name {
+	min-height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	grid-area: 1 / 2 / 3 / 3;
 }
 
-.App-link {
-  color: #61dafb;
+.header--job {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	grid-area: 3 / 2 / 4 /3;
+	margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header--contact {
+	display: flex;
+	grid-area: 2 / 1 / -1 / 2;
+	align-items: flex-end;
+	justify-content: flex-start;
+}
+
+.header--social {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+	grid-area: 3 / 3 / -1 / -1;
+}
+
+.div-title {
+	font-size: 20px;
+	padding-inline: 5px;
+	background-color: white;
+	width: max-content;
+	position: relative;
+	top: -10px;
+}
+
+.info,
+.skills,
+.projects,
+.education {
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(113, 250, 113);
+	padding: 10px;
+	margin: 10px;
+	border-bottom: 1px solid black;
+}
+
+.info--text,
+.skills--text,
+.project--text,
+.education--level,
+.education--location {
+	margin: 0;
+	padding-left: 10px;
+}
+
+.project {
+	background-color: rgb(196, 196, 255);
+	padding: 5px;
+	display: grid;
+	grid-template: 1fr 1fr / 1fr 1fr;
+}
+
+.project--title {
+	display: flex;
+	justify-content: flex-start;
+	grid-area: 1/ 1 /2 /2;
+	margin: 0;
+}
+
+.project--tech {
+	grid-area: 1 / 2 / 2 / -1;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.education--container {
+	display: grid;
+	width: 25vw;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.education--level {
+	font-weight: 900;
 }
