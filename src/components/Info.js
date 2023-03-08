@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function Info() {
+export default function Info(props) {
 	return (
 		<div className="info">
 			<div className="div-title">Info</div>
-			<p className="info--text">blabalbalbalb</p>
+			<p className="info--text">{props.info}</p>
 		</div>
 	);
 }

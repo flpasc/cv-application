@@ -1,10 +1,14 @@
 import React from "react";
 
-export default function Skills() {
+export default function Skills(props) {
+	const { languages, communication } = props.skills;
 	return (
 		<div className="skills">
 			<div className="div-title">Skills</div>
-			<p className="skills--text">I am god</p>
+			<div className="skills--container">
+				<div className="skills--tools">Tools and Languages: {languages}</div>
+				<div className="skills--communication">Communication: {communication}</div>
+			</div>
 		</div>
 	);
 }
