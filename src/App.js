@@ -9,7 +9,8 @@ import Form from "./components/Form";
 
 function App() {
 	const [user, setUser] = useState(
-		JSON.parse(localStorage.getItem("userInfo")) || {
+		// JSON.parse(localStorage.getItem("userInfo")) ||
+		{
 			name: "Fake Dev",
 			job: "Awesome Job",
 			tel: "0800 414141",
@@ -20,8 +21,8 @@ function App() {
 			linkedin: "linkedin",
 			info: "Ad ante tincidunt massa arcu lacus netus maximus habitant nullam convallis augue fermentum venenatis aliquam finibus, iaculis curae eros senectus fusce non ac vehicula natoque congue nunc curabitur himenaeos euismod. Vitae pretium etiam rhoncus aliquet quis per est vel felis id vestibulum, ornare sociosqu praesent inceptos aptent suspendisse varius phasellus tempor dapibus.",
 			skills: {
-				languages: "Javascript, React, HTML, CSS",
-				communication: "German(native), English(fluent)",
+				languages: ["Javascript", "React", "HTML", "CSS", "Typescript"],
+				communication: ["German(native)", "English(fluent)"],
 			},
 			projects: {
 				title: "Project1",
@@ -48,14 +49,21 @@ function App() {
 				[name]: value,
 			};
 		});
-		console.log(name);
-		console.log(value);
+	}
+
+	function handleAdd(name, value) {
+		setUser((prevUser) => {
+			return {
+				...prevUser,
+				[name]: value,
+			};
+		});
 	}
 
 	return (
 		<>
 			<div className="form">
-				<Form handleChange={handleChange} user={user} />
+				<Form handleChange={handleChange} handleAdd={handleAdd} user={user} setUser={setUser} />
 			</div>
 			<div className="print--container">
 				<Header
