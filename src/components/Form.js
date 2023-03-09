@@ -22,8 +22,6 @@ export default function Form(props) {
 		return <Skill key={uuidv4()} lang={lang} />;
 	});
 
-	handleAdd;
-
 	return (
 		<form onSubmit={handleSubmit} className="form--container">
 			<fieldset className="form--fieldset">
