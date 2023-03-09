@@ -6,6 +6,21 @@ body {
 	margin: 0;
 }
 
+.form--container {
+	display: grid;
+	grid-template-columns: 1fr 8fr;
+	gap: 5px;
+	padding: 10px;
+	margin: 10px;
+}
+
+.form--textarea {
+	width: 100%;
+	min-height: 90px;
+	max-height: 120px;
+	overflow: scroll;
+}
+
 .header {
 	display: grid;
 	grid-template: repeat(4, 1fr) / 1fr 2fr 1fr;
@@ -17,6 +32,7 @@ body {
 
 .header--name {
 	min-height: 50px;
+	text-align: center;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -26,6 +42,7 @@ body {
 
 .header--job {
 	display: flex;
+	text-align: center;
 	align-items: flex-start;
 	justify-content: center;
 	grid-area: 3 / 2 / 4 /3;
@@ -93,6 +110,7 @@ body {
 }
 
 .project--tech {
+	font-weight: 900;
 	grid-area: 1 / 2 / 2 / -1;
 	display: flex;
 	justify-content: flex-end;

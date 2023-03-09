@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Info from "./components/Info";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
+import Form from "./components/Form";
 
 function App() {
 	const [user, setUser] = useState({
@@ -33,23 +34,32 @@ function App() {
 		},
 	});
 
+	function handleChange(event) {
+		console.log(event.target);
+	}
+
 	return (
 		<>
-			<Header
-				name={user.name}
-				surname={user.surname}
-				job={user.job}
-				tel={user.tel}
-				town={user.town}
-				country={user.country}
-				email={user.email}
-				git={user.git}
-				linkedin={user.linkedin}
-			/>
-			<Info info={user.info} />
-			<Skills skills={user.skills} />
-			<Projects projects={user.projects} />
-			<Education />
+			<div className="form">
+				<Form handleChange={handleChange} user={user} />
+			</div>
+			<div className="print--container">
+				<Header
+					name={user.name}
+					surname={user.surname}
+					job={user.job}
+					tel={user.tel}
+					town={user.town}
+					country={user.country}
+					email={user.email}
+					git={user.git}
+					linkedin={user.linkedin}
+				/>
+				<Info info={user.info} />
+				<Skills skills={user.skills} />
+				<Projects projects={user.projects} />
+				<Education />
+			</div>
 		</>
 	);
 }
