@@ -35,7 +35,15 @@ function App() {
 	});
 
 	function handleChange(event) {
-		console.log(event.target);
+		const { name, value } = event.target;
+		setUser((prevUser) => {
+			return {
+				...prevUser,
+				[name]: value,
+			};
+		});
+		console.log(name);
+		console.log(value);
 	}
 
 	return (
