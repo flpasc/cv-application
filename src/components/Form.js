@@ -89,12 +89,20 @@ export default function Form(props) {
     setTools(event.target.value)
   }
 
+  const projectsElements = projects.map((proj) => {
+    return (
+      <div className='taskbar-project' key={uuidv4()}>
+        {proj.title}
+      </div>
+    )
+  })
+
   const languagesElements = languages.map((lang) => {
     return <Skill key={uuidv4()} lang={lang} />
   })
 
-  const communicationElements = communication.map((lang) => {
-    return <Skill key={uuidv4()} lang={lang} />
+  const communicationElements = communication.map((comm) => {
+    return <Skill key={uuidv4()} lang={comm} />
   })
 
   return (
@@ -217,6 +225,7 @@ export default function Form(props) {
 
         <fieldset className='form--projects'>
           <legend>Projects</legend>
+          <div className='projects--taskbar'>{projectsElements}</div>
           <label htmlFor='projects'>Title: </label>
           <input
             onChange={handleProjectsChange}

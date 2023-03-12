@@ -144,6 +144,16 @@ body {
   padding-block: 2px;
 }
 
+.projects--taskbar {
+  display: flex;
+}
+
+.taskbar-project {
+  padding: 5px;
+  border: 1px solid black;
+  margin: 5px;
+}
+
 .education--container {
   display: grid;
   width: 25vw;
