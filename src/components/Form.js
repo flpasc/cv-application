@@ -130,7 +130,6 @@ export default function Form(props) {
 
   function handleEducationChange(event) {
     const { name, value } = event.target
-    console.log(educationInput)
     setEducationInput((prevEducation) => ({ ...prevEducation, [name]: value }))
   }
 

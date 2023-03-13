@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './App.css'
 import Education from './components/Education'
 import Header from './components/Header'
@@ -6,8 +6,11 @@ import Info from './components/Info'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Form from './components/Form'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 function App() {
+  const printRef = useRef()
   const [user, setUser] = useState(
     // JSON.parse(localStorage.getItem("userInfo")) ||
     {
@@ -43,8 +46,21 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('userInfo', JSON.stringify(user))
-    console.log(user)
   }, [user])
+
+  async function handleDownloadPdf() {
+    const element = printRef.current
+    const canvas = await html2canvas(element)
+    const data = canvas.toDataURL('image/png')
+
+    const pdf = new jsPDF()
+    const imgProperties = pdf.getImageProperties(data)
+    const pdfWidth = pdf.internal.pageSize.getWidth()
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
+
+    pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight)
+    pdf.save('print.pdf')
+  }
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -61,7 +77,7 @@ function App() {
       <div className='form'>
         <Form handleChange={handleChange} user={user} setUser={setUser} />
       </div>
-      <div className='print--container'>
+      <div ref={printRef} className='print--container'>
         <Header
           name={user.name}
           surname={user.surname}
@@ -78,6 +94,7 @@ function App() {
         <Projects projects={user.projects} />
         <Education education={user.education} />
       </div>
+      <button onClick={handleDownloadPdf}>Generate PDF</button>
     </>
   )
 }
