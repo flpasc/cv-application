@@ -61,6 +61,10 @@ player vs computer option with an unbeatable AI using the minimax algorithm.`,
           location: 'Jena',
           level: 'Abitur',
         },
+        {
+          location: 'Droyßig',
+          level: 'Realschule',
+        },
       ],
     }
   )
