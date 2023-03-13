@@ -13,8 +13,12 @@ export default function Header(props) {
         <div className='header--contact-email'>{props.email}</div>
       </div>
       <div className='header--social'>
-        <div className='header--social-git'>{props.git}</div>
-        <div className='header--social-linkedin'>{props.linkedin}</div>
+        <a href={props.git} className='header--social-git'>
+          Github
+        </a>
+        <a href={props.linkedin} className='header--social-linkedin'>
+          linkedIn
+        </a>
       </div>
     </div>
   )

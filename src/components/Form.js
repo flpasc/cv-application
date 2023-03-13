@@ -65,6 +65,13 @@ export default function Form(props) {
 
   function handleAddProject() {
     const newProject = projectInput
+
+    if (
+      newProject.title.trim() === '' ||
+      newProject.tech.trim() === '' ||
+      newProject.description.trim() === ''
+    )
+      return
     setProjectInput({
       title: '',
       tech: '',
@@ -114,6 +121,60 @@ export default function Form(props) {
     })
   }
 
+  function deleteLanguage(event) {
+    event.preventDefault()
+    const id = event.target.previousSibling.textContent
+
+    const newLanguages = props.user.skills.languages.filter((lang) => {
+      return lang !== id
+    })
+
+    props.setUser((prevUser) => {
+      return {
+        ...prevUser,
+        skills: {
+          ...prevUser.skills,
+          languages: newLanguages,
+        },
+      }
+    })
+  }
+
+  function deleteCommunication(event) {
+    event.preventDefault()
+    const id = event.target.previousSibling.textContent
+
+    const newCommunication = props.user.skills.communication.filter((comm) => {
+      return comm !== id
+    })
+
+    props.setUser((prevUser) => {
+      return {
+        ...prevUser,
+        skills: {
+          ...prevUser.skills,
+          communication: newCommunication,
+        },
+      }
+    })
+  }
+
+  function deleteEducation(event) {
+    event.preventDefault()
+    const id = event.target.previousSibling.textContent
+
+    const newEducation = props.user.education.filter((edu) => {
+      return edu.location !== id
+    })
+
+    props.setUser((prevUser) => {
+      return {
+        ...prevUser,
+        education: newEducation,
+      }
+    })
+  }
+
   function handleProjectsChange(event) {
     const { name, value } = event.target
 
@@ -135,7 +196,7 @@ export default function Form(props) {
 
   const projectsElements = projects.map((proj) => {
     return (
-      <div className='taskbar--project' key={uuidv4()}>
+      <div className='taskbar--item' key={uuidv4()}>
         {proj.title}
         <button onClick={deleteProject} className='taskbar--delete'>
           x
@@ -145,15 +206,36 @@ export default function Form(props) {
   })
 
   const languagesElements = languages.map((lang) => {
-    return <Skill key={uuidv4()} lang={lang} />
+    return (
+      <div className='taskbar--item' key={uuidv4()}>
+        {lang}
+        <button onClick={deleteLanguage} className='taskbar--delete'>
+          x
+        </button>
+      </div>
+    )
   })
 
   const communicationElements = communication.map((comm) => {
-    return <Skill key={uuidv4()} lang={comm} />
+    return (
+      <div className='taskbar--item' key={uuidv4()}>
+        {comm}
+        <button onClick={deleteCommunication} className='taskbar--delete'>
+          x
+        </button>
+      </div>
+    )
   })
 
   const educationElements = education.map((edu) => {
-    return <div key={uuidv4()}>{edu.location}</div>
+    return (
+      <div className='taskbar--item' key={uuidv4()}>
+        {edu.location}
+        <button onClick={deleteEducation} className='taskbar--delete'>
+          x
+        </button>
+      </div>
+    )
   })
 
   return (
@@ -162,6 +244,7 @@ export default function Form(props) {
         <legend>Personal Information</legend>
         <label htmlFor='name'>Name:</label>
         <input
+          className='form--input'
           onChange={props.handleChange}
           type='text'
           value={name}
@@ -171,6 +254,7 @@ export default function Form(props) {
 
         <label htmlFor='job'>Job:</label>
         <input
+          className='form--input'
           onChange={props.handleChange}
           type='text'
           value={job}
@@ -180,6 +264,7 @@ export default function Form(props) {
 
         <label htmlFor='tel'>Tel:</label>
         <input
+          className='form--input'
           onChange={props.handleChange}
           type='tel'
           value={tel}
@@ -189,6 +274,7 @@ export default function Form(props) {
 
         <label htmlFor='town'>Town:</label>
         <input
+          className='form--input'
           onChange={props.handleChange}
           type='text'
           value={town}
@@ -198,6 +284,7 @@ export default function Form(props) {
 
         <label htmlFor='country'>Country:</label>
         <input
+          className='form--input'
           onChange={props.handleChange}
           type='text'
           value={country}
@@ -207,6 +294,7 @@ export default function Form(props) {
 
         <label htmlFor='email'>Email:</label>
         <input
+          className='form--input'
           onChange={props.handleChange}
           type='email'
           value={email}
@@ -216,6 +304,7 @@ export default function Form(props) {
 
         <label htmlFor='git'>GitHub:</label>
         <input
+          className='form--input'
           onChange={props.handleChange}
           type='text'
           value={git}
@@ -225,6 +314,7 @@ export default function Form(props) {
 
         <label htmlFor='linkedin'>linkedIn:</label>
         <input
+          className='form--input'
           onChange={props.handleChange}
           type='text'
           value={linkedin}
@@ -248,6 +338,7 @@ export default function Form(props) {
           {languagesElements}
         </div>
         <input
+          className='form--input'
           onChange={handleExperienceChange}
           type='text'
           placeholder='Add a programming language or tool'
@@ -255,7 +346,12 @@ export default function Form(props) {
           id='lang'
           value={tools}
         />
-        <button onClick={handleAdd} name='languages' type='button'>
+        <button
+          className='btn-add'
+          onClick={handleAdd}
+          name='languages'
+          type='button'
+        >
           Add
         </button>
         <div className='form--lang'>
@@ -269,18 +365,25 @@ export default function Form(props) {
           name='skills'
           id='skills'
           value={language}
+          className='form--input'
         />
-        <button onClick={handleAdd} name='communication' type='button'>
+        <button
+          className='btn-add'
+          onClick={handleAdd}
+          name='communication'
+          type='button'
+        >
           Add
         </button>
 
         <fieldset className='form--projects'>
           <legend>Projects</legend>
-          <div className='projects--taskbar'>{projectsElements}</div>
+          <div className='taskbar'>{projectsElements}</div>
           <label htmlFor='projects'>Title: </label>
           <input
+            className='form--input'
             onChange={handleProjectsChange}
-            placeholder=''
+            placeholder='Title'
             type='text'
             name='title'
             id='title'
@@ -288,9 +391,11 @@ export default function Form(props) {
           />
           <label htmlFor='tech'>Used Tools:</label>
           <input
+            className='form--input'
             type='text'
             name='tech'
             id='tech'
+            placeholder='Used Technologies'
             onChange={handleProjectsChange}
             value={projectInput.tech}
           />
@@ -300,10 +405,16 @@ export default function Form(props) {
             type='text'
             name='description'
             id='project-description'
+            placeholder='Describe your project'
             onChange={handleProjectsChange}
             value={projectInput.description}
           />
-          <button name='add-project' onClick={handleAddProject} type='button'>
+          <button
+            className='btn-add'
+            name='add-project'
+            onClick={handleAddProject}
+            type='button'
+          >
             Add
           </button>
         </fieldset>
@@ -314,21 +425,27 @@ export default function Form(props) {
         <div className='form--lang'>{educationElements}</div>
         <label htmlFor='Location'>Location:</label>
         <input
+          className='form--input'
           onChange={handleEducationChange}
           type='text'
           name='location'
+          placeholder='Where did you go'
           id='location'
           value={educationInput.location}
         />
         <label htmlFor='level'>Level of education:</label>
         <input
+          className='form--input'
           type='text'
           id='level'
+          placeholder='What did you earn'
           name='level'
           value={educationInput.level}
           onChange={handleEducationChange}
         />
-        <button onClick={handleAddEducation}>Add</button>
+        <button className='btn-add' onClick={handleAddEducation}>
+          Add
+        </button>
       </fieldset>
     </form>
   )

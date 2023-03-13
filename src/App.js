@@ -12,27 +12,48 @@ import jsPDF from 'jspdf'
 function App() {
   const printRef = useRef()
   const [user, setUser] = useState(
-    // JSON.parse(localStorage.getItem("userInfo")) ||
+    // JSON.parse(localStorage.getItem('userInfo')) ||
     {
-      name: 'Awesome Dev',
-      job: 'Master Hacker',
+      name: 'Name Surname',
+      job: 'Motivated Dev',
       tel: '0800 414141',
       town: 'Jena',
       country: 'Germany',
-      email: 'hireme@please.com',
+      email: 'hireme@now.com',
       git: 'github',
       linkedin: 'linkedin',
-      info: 'Ad ante tincidunt massa arcu lacus netus maximus habitant nullam convallis augue fermentum venenatis aliquam finibus, iaculis curae eros senectus fusce non ac vehicula natoque congue nunc curabitur himenaeos euismod. Vitae pretium etiam rhoncus aliquet quis per est vel felis id vestibulum, ornare sociosqu praesent inceptos aptent suspendisse varius phasellus tempor dapibus.',
+      info: 'As a self-taught front-end web developer with proficiency in React and Javascript, I have a passion for designing and developing aesthetically pleasing and functional web applications, and am dedicated to delivering quality results through my problem-solving skills and attention to detail.',
       skills: {
         languages: ['Javascript', 'React', 'HTML', 'CSS', 'Typescript'],
         communication: ['German(native)', 'English(fluent)'],
       },
       projects: [
         {
-          title: 'Project1',
-          tech: ['Next.js'],
-          description:
-            'Adipiscing class arcu phasellus non sit curae velit ullamcorper nisl ante.',
+          title: 'Battleship',
+          tech: ['js', 'html', 'css', 'jest'],
+          description: ` This JavaScript project involves implementing the classic game ’Battleship’ using Test Driven Development, where the Ship and
+Gameboard factories are created to simulate the game logic, and a Player object is created to play against the computer with
+random moves, while the DOM is used to render the gameboards and receive user input for attacking.`,
+        },
+        {
+          title: 'Weather App',
+          tech: ['js', 'html', 'css'],
+          description: `The Weather App project in the JavaScript Course involves creating a weather forecast site using a weather API, allowing users to
+search for a specific location and toggle displaying the data in Fahrenheit or Celsius, and implementing security measures such
+as storing API keys on the server to prevent unauthorized access.`,
+        },
+        {
+          title: 'ToDo List',
+          tech: ['js', 'html', 'css'],
+          description: `The Todo List project for a JavaScript course involves creating a web application that dynamically generates todo items as
+objects with properties like title, description, due date, priority, notes, and checklist, which can be organized into separate
+projects and persisted using Web Storage API`,
+        },
+        {
+          title: 'TicTacToe',
+          tech: ['js', 'html', 'css'],
+          description: `The project is to create a Tic Tac Toe game in JavaScript, utilizing modules and factories to minimize global code and including a
+player vs computer option with an unbeatable AI using the minimax algorithm.`,
         },
       ],
       education: [
@@ -94,7 +115,9 @@ function App() {
         <Projects projects={user.projects} />
         <Education education={user.education} />
       </div>
-      <button onClick={handleDownloadPdf}>Generate PDF</button>
+      <button className='btn-pdf' onClick={handleDownloadPdf}>
+        Generate PDF
+      </button>
     </>
   )
 }

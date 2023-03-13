@@ -1,22 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Roboto+Condensed&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  padding: 0;
+
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+label {
+  font-weight: 600;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form--container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 5px;
   padding: 10px;
   margin: 10px;
+  background-color: rgb(54, 105, 70);
+  width: 100vw;
 }
 
 .form--fieldset {
+  width: clamp(500px, 70%, 700px);
   display: flex;
   flex-direction: column;
+  background-color: white;
+}
+
+fieldset > legend {
+  background-color: white;
+  border-radius: 5px;
+  padding: 2px 10px;
+  border: 1px solid black;
+}
+
+.form--fieldset > label {
+  margin-block: 7px 2px;
+}
+
+.form--input {
+  padding: 5px;
 }
 
 .form--textarea {
@@ -24,6 +65,10 @@ body {
   min-height: 90px;
   max-height: 120px;
   overflow: scroll;
+  padding: 5px;
+  margin-block: 0px 20px;
+  font-family: 'Roboto';
+  font-size: 16px;
 }
 
 .form--lang {
@@ -32,19 +77,34 @@ body {
   font-weight: 600;
 }
 
+.form--lang > label {
+  margin-block: 10px 2px;
+}
+
 .form--projects {
   display: flex;
   flex-direction: column;
+  border: none;
 }
 
-.skill {
-  font-weight: 200;
+.form--projects > legend {
+  padding: 10px 0px;
+  font-weight: 900;
+  border: none;
+}
+
+.form--projects > label {
+  margin-block: 10px 2px;
 }
 
 .print--container {
-  border: 2px solid rgb(51, 184, 77);
+  display: flex;
+  flex-direction: column;
+
+  border: 2px solid rgb(0, 0, 0);
   margin: 20px;
   margin-top: 50px;
+  width: clamp(500px, 75%, 800px);
 }
 
 .header {
@@ -52,7 +112,7 @@ body {
   grid-template: repeat(4, 1fr) / 1fr 2fr 1fr;
   padding: 10px;
   margin: 10px;
-  border-bottom: 2px solid rgb(51, 184, 77);
+  border-bottom: 2px solid rgb(0, 0, 0);
 }
 
 .header--name {
@@ -107,7 +167,7 @@ body {
   flex-direction: column;
   padding: 10px;
   margin: 10px;
-  border-bottom: 2px solid rgb(51, 184, 77);
+  border-bottom: 2px solid rgb(0, 0, 0);
 }
 
 .info--text,
@@ -115,14 +175,35 @@ body {
 .project--text,
 .education--level,
 .education--location {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding-left: 10px;
 }
 
+.skills--tools,
+.skills--communication {
+  display: flex;
+}
+
+.skills--item {
+  padding-inline: 10px;
+}
+
+.education {
+  border: none;
+}
+
+.education--item {
+  display: flex;
+  flex-direction: row;
+}
+
 .project {
-  padding: 5px;
+  padding: 10px;
+  border: 1px solid rgba(198, 198, 198, 0.445);
   display: grid;
-  grid-template: 1fr 2fr / 1fr 1fr;
+  grid-template: 1fr 4fr / 1fr 1fr;
 }
 
 .project--title {
@@ -137,6 +218,7 @@ body {
   grid-area: 1 / 2 / 2 / -1;
   display: flex;
   justify-content: flex-end;
+  margin: 0;
 }
 
 .project--text {
@@ -144,14 +226,23 @@ body {
   padding-block: 2px;
 }
 
-.projects--taskbar {
+.tech--element {
+  padding-inline: 2px;
+}
+
+.taskbar {
   display: flex;
 }
 
-.taskbar--project {
+.taskbar--item {
+  background-color: rgb(251, 251, 251);
   padding: 5px;
-  border: 1px solid black;
-  margin: 5px;
+  margin-inline: 5px;
+  border: 1px solid rgb(233, 233, 233);
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.43);
+  font-weight: 100;
+  margin-block: 5px;
 }
 
 .taskbar--delete {
@@ -168,12 +259,47 @@ body {
   cursor: pointer;
 }
 
+.taskbar--delete:hover {
+  transform: scale(1.4);
+}
+
 .education--container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   width: 25vw;
   grid-template-columns: repeat(2, 1fr);
 }
 
 .education--level {
   font-weight: 900;
+}
+
+.btn-add {
+  margin-block: 5px;
+  background-color: rgb(95, 199, 95);
+  border: none;
+  box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.429);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.btn-add:hover {
+  background-color: rgb(74, 162, 74);
+}
+
+.btn-pdf {
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: rgb(95, 199, 95);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-pdf:hover {
+  background-color: rgb(74, 162, 74);
 }
