@@ -74,6 +74,24 @@ export default function Form(props) {
     })
   }
 
+  function deleteProject(event) {
+    event.preventDefault()
+    const id = event.target.previousSibling.textContent
+
+    const newProjects = props.user.projects.filter((project) => {
+      return project.title !== id
+    })
+
+    console.log(newProjects)
+
+    props.setUser((prevUser) => {
+      return {
+        ...prevUser,
+        projects: newProjects,
+      }
+    })
+  }
+
   function handleProjectsChange(event) {
     const { name, value } = event.target
 
@@ -91,8 +109,11 @@ export default function Form(props) {
 
   const projectsElements = projects.map((proj) => {
     return (
-      <div className='taskbar-project' key={uuidv4()}>
+      <div className='taskbar--project' key={uuidv4()}>
         {proj.title}
+        <button onClick={deleteProject} className='taskbar--delete'>
+          x
+        </button>
       </div>
     )
   })
