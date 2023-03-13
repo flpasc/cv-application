@@ -32,16 +32,18 @@ function App() {
             'Adipiscing class arcu phasellus non sit curae velit ullamcorper nisl ante.',
         },
       ],
-      education: {
-        location: 'Fakecampus',
-        level: 'Fakeeducation',
-      },
+      education: [
+        {
+          location: 'Jena',
+          level: 'Abitur',
+        },
+      ],
     }
   )
 
   useEffect(() => {
-    console.log(user)
     localStorage.setItem('userInfo', JSON.stringify(user))
+    console.log(user)
   }, [user])
 
   function handleChange(event) {
@@ -74,7 +76,7 @@ function App() {
         <Info info={user.info} />
         <Skills skills={user.skills} />
         <Projects projects={user.projects} />
-        <Education />
+        <Education education={user.education} />
       </div>
     </>
   )

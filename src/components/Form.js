@@ -27,6 +27,10 @@ export default function Form(props) {
     tech: '',
     description: '',
   })
+  const [educationInput, setEducationInput] = useState({
+    location: '',
+    level: '',
+  })
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -74,6 +78,26 @@ export default function Form(props) {
     })
   }
 
+  function handleAddEducation(event) {
+    event.preventDefault()
+    const newEducation = educationInput
+
+    if (newEducation.location.trim() === '' || newEducation.level.trim() === '')
+      return
+
+    setEducationInput({
+      location: '',
+      level: '',
+    })
+
+    props.setUser((prevUser) => {
+      return {
+        ...prevUser,
+        education: [...prevUser.education, newEducation],
+      }
+    })
+  }
+
   function deleteProject(event) {
     event.preventDefault()
     const id = event.target.previousSibling.textContent
@@ -81,8 +105,6 @@ export default function Form(props) {
     const newProjects = props.user.projects.filter((project) => {
       return project.title !== id
     })
-
-    console.log(newProjects)
 
     props.setUser((prevUser) => {
       return {
@@ -95,7 +117,6 @@ export default function Form(props) {
   function handleProjectsChange(event) {
     const { name, value } = event.target
 
-    console.log(projectInput)
     setProjectInput((prevInput) => ({ ...prevInput, [name]: value }))
   }
 
@@ -105,6 +126,12 @@ export default function Form(props) {
 
   function handleExperienceChange(event) {
     setTools(event.target.value)
+  }
+
+  function handleEducationChange(event) {
+    const { name, value } = event.target
+    console.log(educationInput)
+    setEducationInput((prevEducation) => ({ ...prevEducation, [name]: value }))
   }
 
   const projectsElements = projects.map((proj) => {
@@ -124,6 +151,10 @@ export default function Form(props) {
 
   const communicationElements = communication.map((comm) => {
     return <Skill key={uuidv4()} lang={comm} />
+  })
+
+  const educationElements = education.map((edu) => {
+    return <div key={uuidv4()}>{edu.location}</div>
   })
 
   return (
@@ -273,22 +304,32 @@ export default function Form(props) {
             onChange={handleProjectsChange}
             value={projectInput.description}
           />
-
           <button name='add-project' onClick={handleAddProject} type='button'>
             Add
           </button>
         </fieldset>
       </fieldset>
+
       <fieldset className='form--fieldset'>
         <legend>Education</legend>
-        <label htmlFor='education'>Education:</label>
+        <div className='form--lang'>{educationElements}</div>
+        <label htmlFor='Location'>Location:</label>
         <input
-          onChange={props.handleChange}
+          onChange={handleEducationChange}
           type='text'
-          value={education}
-          name='education'
-          id='education'
+          name='location'
+          id='location'
+          value={educationInput.location}
         />
+        <label htmlFor='level'>Level of education:</label>
+        <input
+          type='text'
+          id='level'
+          name='level'
+          value={educationInput.level}
+          onChange={handleEducationChange}
+        />
+        <button onClick={handleAddEducation}>Add</button>
       </fieldset>
     </form>
   )
