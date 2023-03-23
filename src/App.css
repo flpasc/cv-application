@@ -245,6 +245,11 @@ fieldset > legend {
   margin-block: 5px;
 }
 
+.taskbar--item:hover {
+  background-color: rgb(204, 204, 204);
+  box-shadow: 2px 2px 6px rgba(133, 133, 133, 0.43);
+}
+
 .taskbar--delete {
   padding: 5;
   margin: 0;
